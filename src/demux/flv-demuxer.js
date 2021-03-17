@@ -22,6 +22,7 @@ import SPSParser from './sps-parser.js';
 import DemuxErrors from './demux-errors.js';
 import MediaInfo from '../core/media-info.js';
 import {IllegalStateException} from '../utils/exception.js';
+import {exportVideoTrack} from '../flv';
 
 function Swap16(src) {
     return (((src >>> 8) & 0xFF) |
@@ -1068,6 +1069,17 @@ class FLVDemuxer {
 
             if (unitType === 5) {  // IDR
                 keyframe = true;
+            }
+
+            if (unitType === 6) {
+                let payloadType = v.getUint8(offset + lengthSize + 1); // payloadType is at 1 place
+                // sei payload type is 5
+                if (payloadType === 5) {
+                    let curOffset = offset + lengthSize + 2;  // length of sei content is at 2 place
+                    let seiContentLength = v.getUint8(curOffset);
+                    let seiContent = new Uint8Array(arrayBuffer, dataOffset + curOffset, seiContentLength);
+                    exportVideoTrack('sei', seiContent);
+                }
             }
 
             let data = new Uint8Array(arrayBuffer, dataOffset + offset, lengthSize + naluSize);

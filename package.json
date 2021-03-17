@@ -40,6 +40,7 @@
     "gulp-rename": "^1.4.0",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^2.1.1",
+    "native": "^0.3.3",
     "opn": "^5.4.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.2",

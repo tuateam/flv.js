@@ -84,6 +84,11 @@ npm install -g gulp  # install build tool
 npm run dev          # with incremental compile and auto reload
 ```
 
+## 如果遇到启动问题，尝试
+```
+npm i -D native
+```
+
 ## Design
 See [design.md](docs/design.md)
 

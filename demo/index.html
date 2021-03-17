@@ -106,6 +106,10 @@
             });
             player.attachMediaElement(element);
             player.load();
+
+            flvjs.setExportVideoTrackFunction((type, data) => {
+                console.log(data);
+            })
         }
 
         function flv_start() {
